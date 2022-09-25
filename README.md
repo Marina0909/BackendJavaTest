@@ -1,2 +1,0 @@
-# BackendJavaTest
-BackendJava test
