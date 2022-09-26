@@ -26,9 +26,13 @@ public class MinimarketTest {
     @BeforeAll
     static public void before() {
 
-        baseURI = "https://minimarket1.herokuapp.com/market";
+        //baseURI = "https://minimarket1.herokuapp.com/market";
         requestSpecification = new RequestSpecBuilder()
                 .log(LogDetail.ALL)
+                .removePathParam("username")
+                .removeQueryParam("apiKey")
+                .addQueryParam("hash")
+                .setBaseUri("https://minimarket1.herokuapp.com/market")
                 .build();
         responseSpecification = new ResponseSpecBuilder()
                 .log(LogDetail.ALL)
@@ -37,7 +41,7 @@ public class MinimarketTest {
         }
     @DisplayName("Добавление продукта")
     @Order(1)
-    //@Test
+    @Test
     void addProductMinimarketTest(){
 
         id = given()
@@ -54,7 +58,7 @@ public class MinimarketTest {
     }
     @DisplayName("Поиск продукта")
     @Order(2)
-    //@Test
+    @Test
     void readProductMinimarketTest() throws IOException {
         SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder()
                 .build(Resources.getResourceAsStream("myBatisConfig.xml"));
@@ -70,7 +74,7 @@ public class MinimarketTest {
 
     @DisplayName("Удаление продукта")
     @Order(3)
-    //@Test
+    @Test
     void deleteProductMinimarketTest() throws IOException {
         SqlSessionFactory sessionFactoryD = new SqlSessionFactoryBuilder()
                 .build(Resources.getResourceAsStream("myBatisConfig.xml"));
@@ -83,7 +87,7 @@ public class MinimarketTest {
 
     @DisplayName("Проверка удаления продукта")
     @Order(4)
-    //@Test
+    @Test
     void checkDelProductMinimarketTest() {
         given()
                 .contentType("application/json")
